@@ -1,0 +1,21 @@
+body{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: url(/fantasy.jpg);
+   background-size: cover;
+   margin: 0;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#map{
+   position: absolute;
+   width: 1600px;
+   height: 800px;
+}
+
+.block{
+   filter: opacity(60%);
+}

@@ -1,0 +1,217 @@
+var keyState = {};
+window.addEventListener('keydown', function(key){
+      keyState[key.keyCode || key.which] = true;
+}, true);
+window.addEventListener('keyup',function(key){
+   keyState[key.keyCode || key.which] = false;
+},true);
+
+
+
+const playerWidth = 110;
+const playerHeight = 70;
+
+function idle(){
+   document.getElementById("player").style.animation = "idle 0.5s infinite steps(7)";
+}
+function run(){
+   document.getElementById("player").style.animation = "run 0.5s infinite steps(7)";
+}
+
+document.getElementById("player").style.width = String(playerWidth) + "px";
+document.getElementById("player").style.height = String(playerHeight) + "px";
+
+function collisionCheck(mode){
+   let player = document.getElementById("player");
+   let blocks = document.getElementsByClassName("block");
+   for (let index = 0; index < blocks.length; index++) {
+      const element = blocks[index];
+
+      var playerLeft = Number(player.style.left.slice(0, -2));
+      var playerTop = Number(player.style.top.slice(0, -2));
+
+      var elementLeft = Number(element.style.left.slice(0, -2));
+      var elementTop = Number(element.style.top.slice(0, -2));
+
+      var elementWidth = Number(element.style.width.slice(0, -2));
+      var elementHeight = Number(element.style.height.slice(0, -2));
+
+      switch(mode){
+         case 1:
+            if(((playerLeft <= elementLeft && playerLeft + playerWidth - 1 >= elementLeft)||(playerLeft <= elementLeft + elementWidth - 1 && playerLeft + playerWidth - 1 >= elementLeft + elementWidth - 1) ||  ( playerLeft > elementLeft && playerLeft + playerWidth - 1 < elementLeft + elementWidth - 1 ) ) && playerTop == elementTop + elementHeight)return 1;
+            break;
+         case 2:
+            if(((playerTop <= elementTop && playerTop + playerHeight - 1 >= elementTop)||(playerTop <= elementTop + elementHeight - 1 && playerTop + playerHeight >= elementTop + elementHeight - 1) || ( playerTop > elementTop && playerTop + playerHeight - 1 < elementTop + elementHeight - 1) ) && elementLeft == playerLeft + playerWidth)return 1;
+            break;
+         case 3:
+            if(((playerLeft <= elementLeft && playerLeft + playerWidth - 1 >= elementLeft)||(playerLeft <= elementLeft + elementWidth - 1 && playerLeft + playerWidth - 1 >= elementLeft + elementWidth - 1) || ( playerLeft > elementLeft && playerLeft + playerWidth - 1 < elementLeft + elementWidth )) && elementTop == playerTop + playerHeight)return 1;
+            break;
+         case 4:
+            if(((playerTop <= elementTop && playerTop + playerHeight - 1 >= elementTop)||(playerTop <= elementTop + elementHeight - 1 && playerTop + playerHeight >= elementTop + elementHeight - 1) || ( playerTop > elementTop && playerTop + playerHeight - 1 < elementTop + elementHeight - 1)) && playerLeft == elementLeft + elementWidth)return 1;
+            break;
+      }
+   }
+   return 0;
+}
+var playerOrdinateSpeed = 0;
+const horizontalSpeed = 1;
+const g = 0.1;
+
+function strafe(mode){
+   player = document.getElementById("player").style;
+   switch(mode){
+      case 1:
+         playerOrdinateSpeed = -10;
+         break;
+      case 2:
+         player.left = String(Number(player.left.slice(0, -2)) + horizontalSpeed) + "px";
+         break;
+      case 3:
+
+         break;
+      case 4:
+         player.left = String(Number(player.left.slice(0, -2)) - horizontalSpeed) + "px"
+         break;
+   }
+}
+
+function gameLoop() {
+   playerTop = document.getElementById("player").style.top;
+   if(keyState[38] || keyState[87] ||)
+   if (keyState[38] || keyState[87]){
+      if(!collisionCheck(1) && (collisionCheck(3) || collisionCheck(2) || collisionCheck(4)))strafe(1)
+   }
+   if (keyState[39] || keyState[68]){
+      if(!collisionCheck(2))strafe(2)
+      run();
+   }
+   if (keyState[40] || keyState[83]){
+      if(!collisionCheck(3))strafe(3)
+   }
+   if (keyState[37] || keyState[65]){
+      if(!collisionCheck(4))strafe(4)
+      run();
+   }
+   if( !keyState[38] && !keyState[40] && playerOrdinateSpeed == 0){
+      idle();
+   }
+   
+   if(!collisionCheck(3)){
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+
+   if(playerOrdinateSpeed < 0){
+      for (let index = 0; index > Math.round(playerOrdinateSpeed); index--) {
+         if(!collisionCheck(1)){
+            document.getElementById("player").style.top = String(Number(String(playerTop.slice(0, -2))) + index) + "px";
+         }
+         else{
+            playerOrdinateSpeed = 0;
+            break;
+         }
+      }
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+   if(playerOrdinateSpeed > 0){
+      for (let index = 0; index < Math.round(playerOrdinateSpeed); index++) {
+         if(!collisionCheck(3)){
+            document.getElementById("player").style.top = String(Number(String(playerTop.slice(0, -2))) + index) + "px";
+         }
+         else{
+            playerOrdinateSpeed = 0;
+            break;
+         }
+      }
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+
+   if(collisionCheck(3)){
+      playerOrdinateSpeed = 0;
+   }
+
+   document.getElementById("player").innerHTML = String(playerOrdinateSpeed);
+
+   setTimeout(gameLoop, 10);
+}    
+gameLoop();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function gameLoop() {
+   playerTop = document.getElementById("player").style.top;
+   if (keyState[38] || keyState[87]){
+      if(!collisionCheck(1) && (collisionCheck(3) || collisionCheck(2) || collisionCheck(4)))strafe(1)
+   }
+   if (keyState[39] || keyState[68]){
+      if(!collisionCheck(2))strafe(2)
+      run();
+   }
+   if (keyState[40] || keyState[83]){
+      if(!collisionCheck(3))strafe(3)
+   }
+   if (keyState[37] || keyState[65]){
+      if(!collisionCheck(4))strafe(4)
+      run();
+   }
+   if( !keyState[38] && !keyState[40] && playerOrdinateSpeed == 0){
+      idle();
+   }
+   
+   if(!collisionCheck(3)){
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+
+   if(playerOrdinateSpeed < 0){
+      for (let index = 0; index > Math.round(playerOrdinateSpeed); index--) {
+         if(!collisionCheck(1)){
+            document.getElementById("player").style.top = String(Number(String(playerTop.slice(0, -2))) + index) + "px";
+         }
+         else{
+            playerOrdinateSpeed = 0;
+            break;
+         }
+      }
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+   if(playerOrdinateSpeed > 0){
+      for (let index = 0; index < Math.round(playerOrdinateSpeed); index++) {
+         if(!collisionCheck(3)){
+            document.getElementById("player").style.top = String(Number(String(playerTop.slice(0, -2))) + index) + "px";
+         }
+         else{
+            playerOrdinateSpeed = 0;
+            break;
+         }
+      }
+      playerOrdinateSpeed = playerOrdinateSpeed + g;
+   }
+
+   if(collisionCheck(3)){
+      playerOrdinateSpeed = 0;
+   }
+
+   document.getElementById("player").innerHTML = String(playerOrdinateSpeed);
+
+   setTimeout(gameLoop, 10);
+}    
