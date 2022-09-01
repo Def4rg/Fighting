@@ -33,7 +33,7 @@ class Player{
    #playerLeft = 0;
    #playerTop = 0;
    
-   #jumpImpuls = -10;
+   jumpImpuls = -10;
    #playerOrdinateSpeed = 0;
    #playerSpeed = 5;
 
