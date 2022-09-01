@@ -33,7 +33,7 @@ class Player{
    #playerLeft = 0;
    #playerTop = 0;
    
-   jumpImpuls = -10;
+   #jumpImpuls = -10;
    #playerOrdinateSpeed = 0;
    #playerSpeed = 5;
 
@@ -66,6 +66,9 @@ class Player{
       this.#healthBarAdress.style.backgroundSize = "cover";
       this.#healthBarAdress.style.backgroundRepeat = "no-repeat";
 
+   }
+   JumpImpuls(value){
+         this.#jumpImpuls = value;
    }
 
    CheckCollision(mode){
