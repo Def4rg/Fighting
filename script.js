@@ -6,7 +6,29 @@ window.addEventListener('keyup',function(key){
    keyState[key.keyCode || key.which] = false;
 },true);
 
-const g = 0.1;
+let gameOver = document.createElement('div');
+gameOver.id = 'gameover';
+gameOver.zIndex = "100";
+gameOver.opacity = "1.0";
+gameOver.textContent = "GAME OVER";
+
+let button1 = document.createElement('div');
+button1.id = 'startButton';
+button1.className = 'name';
+button1.innerText = 'Restart';
+gameOver.append(button1);
+button1.addEventListener('click', restart);
+
+let button2 = document.createElement('div');
+button2.id = 'startButton';
+button2.className = 'name';
+button2.innerText = 'Menu';
+gameOver.append(button2)
+button2.addEventListener('click', menu);
+
+document.body.append(gameOver);
+
+const g = 0.2;
 
 const KeyWords = {
    LEFTARROW: 37,
@@ -19,21 +41,74 @@ const KeyWords = {
    D: 68
 }
 
+function restart(){
+   document.location.reload();
+}
+
+function menu(){
+   document.location.href = "index.html";
+}
+
 class Player{
-   #collisionWidth = 23;
-   #collisionHeight = 56;
-   #Animateleft = -10;
-   #Animatetop = -15;
-   #AnimateWidth = 110;
-   #AnimateHeight = 74;
+   #heroSkin = 0;
+   #skinProperties = [
+      {
+         collisionWidth: 23,
+         collisionHeight: 56,
+         Animateleft: -10,
+         Animatetop: -15,
+         AnimateWidth: 110,
+         AnimateHeight: 74
+      },
+      {
+         collisionWidth: 23,
+         collisionHeight: 56,
+         Animateleft: -10,
+         Animatetop: -15,
+         AnimateWidth: 110,
+         AnimateHeight: 74
+      },
+      {
+         collisionWidth: 28,
+         collisionHeight: 42,
+         Animateleft: -57,
+         Animatetop: -47,
+         AnimateWidth: 125,
+         AnimateHeight: 86
+      },
+      {
+         collisionWidth: 28,
+         collisionHeight: 50,
+         Animateleft: -40,
+         Animatetop: -100,
+         AnimateWidth: 160,
+         AnimateHeight: 150
+      }
+   ];
+
+   #collisionWidth;
+   #collisionHeight;
+   #Animateleft;
+   #Animatetop;
+   #AnimateWidth;
+   #AnimateHeight;
+   
    #hp = 100;
    #lifesCount = 3;
+
    #playerLeftSpawnPoint = 0;
    #playerTopSpawnPoint = 0;
    #playerLeft = 0;
    #playerTop = 0;
-   
-   #jumpImpuls = -10;
+
+   #AnimationSteps = [
+      [ 7, 5, 7, 1, 1, 3, 5 ],
+      [ 3, 3, 7, 1, 1, 2, 6 ], 
+      [ 9, 6, 7, 2, 2, 2, 10 ], 
+      [7, 7, 7, 1, 1, 2, 6]
+   ];
+
+   #jumpImpuls = -8;
    #playerOrdinateSpeed = 0;
    #playerSpeed = 5;
 
@@ -48,7 +123,16 @@ class Player{
    #playerInTakeHit = 0;
    #playerInDeath = 0;
 
-   constructor(element){
+   constructor(element, value){
+      this.#heroSkin = Number(value);
+
+      this.#collisionWidth = this.#skinProperties[this.#heroSkin].collisionWidth;
+      this.#collisionHeight = this.#skinProperties[this.#heroSkin].collisionHeight;
+      this.#Animateleft = this.#skinProperties[this.#heroSkin].Animateleft;
+      this.#Animatetop = this.#skinProperties[this.#heroSkin].Animatetop;
+      this.#AnimateWidth = this.#skinProperties[this.#heroSkin].AnimateWidth;
+      this.#AnimateHeight = this.#skinProperties[this.#heroSkin].AnimateHeight;
+
       this.#elementAdress = element;
       this.#playerLeftSpawnPoint = this.#elementAdress.style.left.slice(0, -2);
       this.#playerTopSpawnPoint = this.#elementAdress.style.top.slice(0, -2);
@@ -67,8 +151,13 @@ class Player{
       this.#healthBarAdress.style.backgroundRepeat = "no-repeat";
 
    }
-   JumpImpuls(value){
-         this.#jumpImpuls = value;
+
+   getDeathTime(){
+      return this.#playerInDeath;
+   }
+
+   getPlayerDirection(){
+      return this.#playerDirection;
    }
 
    CheckCollision(mode){
@@ -76,7 +165,7 @@ class Player{
       for (let index = 0; index < blocks.length; index++) {
          const element = blocks[index];
 
-         var playerLeft = this.#playerLeft;
+         var playerLeft = Number(this.#playerLeft);
          var playerTop =  this.#playerTop;
          var playerWidth = this.#collisionWidth;
          var playerHeight = this.#collisionHeight;
@@ -115,23 +204,22 @@ class Player{
    }
 
    HpShow(){
-
+      /*..*/
    }
 
    CheckAttackCollision(player){
       if(this.#playerDirection){
-         var topLeftPoint = [this.#playerLeft + this.#Animateleft, this.#playerTop + this.#Animatetop];
-         var topRightPoint = [this.#playerLeft + this.#Animateleft + this.#AnimateWidth, this.#playerTop + this.#Animatetop];
-         var bottomLeftPoint = [this.#playerLeft + this.#Animateleft, this.#playerTop + this.#Animatetop + this.#AnimateHeight];
-         var bottomRightPoint = [this.#playerLeft + this.#Animateleft + this.#AnimateWidth, this.#playerTop + this.#Animatetop + this.#AnimateHeight];
+         var topLeftPoint = [Number(this.#playerLeft) + Number(this.#Animateleft), Number(this.#playerTop) + Number(this.#Animatetop)];
+         var topRightPoint = [Number(this.#playerLeft) + Number(this.#Animateleft) + Number(this.#AnimateWidth), Number(this.#playerTop) + Number(this.#Animatetop)];
+         var bottomLeftPoint = [Number(this.#playerLeft) + Number(this.#Animateleft), Number(this.#playerTop) + Number(this.#Animatetop) + Number(this.#AnimateHeight)];
+         var bottomRightPoint = [Number(this.#playerLeft) + Number(this.#Animateleft) + Number(this.#AnimateWidth), Number(this.#playerTop) + Number(this.#Animatetop) + Number(this.#AnimateHeight)];
+
 
          let playerPointArray = [
             [Number(player.Coordinates()[0]), player.Coordinates()[1]],
             [Number(player.Coordinates()[0]) + this.#collisionWidth, player.Coordinates()[1]],
             [Number(player.Coordinates()[0]), player.Coordinates()[1] + this.#AnimateWidth],
             [Number(player.Coordinates()[0]) + this.#collisionWidth, player.Coordinates()[1] + this.#AnimateWidth]
-            //Преобразование строк в число
-            //Откуда взялись строки, пока не нашел
          ]
          console.log(playerPointArray);
 
@@ -142,18 +230,16 @@ class Player{
          return 0;
       }
       else{
-         var topLeftPoint = [this.#playerLeft + this.#collisionWidth - this.#AnimateWidth, this.#playerTop + this.#Animatetop];
-         var topRightPoint = [this.#playerLeft + this.#collisionWidth, this.#playerTop + this.#Animatetop];
-         var bottomLeftPoint = [this.#playerLeft + this.#collisionWidth - this.#AnimateWidth, this.#playerTop + this.#Animatetop + this.#AnimateHeight];
-         var bottomRightPoint = [this.#playerLeft + this.#collisionWidth, this.#playerTop + this.#Animatetop + this.#AnimateHeight];
+         var topLeftPoint = [+this.#playerLeft + +this.#collisionWidth - +this.#AnimateWidth - +this.#Animateleft, +this.#playerTop + +this.#Animatetop];
+         var topRightPoint = [+this.#playerLeft + +this.#collisionWidth, +this.#playerTop + +this.#Animatetop];
+         var bottomLeftPoint = [+this.#playerLeft + +this.#collisionWidth - +this.#AnimateWidth - +this.#Animateleft, +this.#playerTop + +this.#Animatetop + +this.#AnimateHeight];
+         var bottomRightPoint = [+this.#playerLeft + +this.#collisionWidth, +this.#playerTop + +this.#Animatetop + +this.#AnimateHeight];
 
          let playerPointArray = [
             [Number(player.Coordinates()[0]), player.Coordinates()[1]],
             [Number(player.Coordinates()[0]) + this.#collisionWidth, player.Coordinates()[1]],
             [Number(player.Coordinates()[0]), player.Coordinates()[1] + this.#AnimateWidth],
             [Number(player.Coordinates()[0]) + this.#collisionWidth, player.Coordinates()[1] + this.#AnimateWidth]
-            //Преобразование строк в число
-            //Откуда взялись строки, пока не нашел
          ]
          console.log(playerPointArray);
 
@@ -187,27 +273,27 @@ class Player{
    AnimationSet(animation){
       var date = new Date().getTime();
       if(date - this.#playerInDeath <= 1000){
-         this.#elementAnimationAdress.style.animation = "death 1s infinite steps(5)";
+         this.#elementAnimationAdress.style.animation = "death" + this.#heroSkin + " 1s infinite steps(" + this.#AnimationSteps[this.#heroSkin][6] + " )";
       }
       else if(date - this.#playerInTakeHit <= 500){
-         this.#elementAnimationAdress.style.animation = "takehit 0.5s infinite steps(3)";
+         this.#elementAnimationAdress.style.animation = "takehit" + this.#heroSkin + " 0.5s infinite steps(" + this.#AnimationSteps[this.#heroSkin][5] + ")";
       }
       else if(date - this.#playerInAttack <= 200){
-         this.#elementAnimationAdress.style.animation = "attack 0.2s infinite steps(5)";
+         this.#elementAnimationAdress.style.animation = "attack" + this.#heroSkin + " 0.2s infinite steps(" + this.#AnimationSteps[this.#heroSkin][1] + ")";
       }
       else{
          switch(animation){
             case "idle":
-               this.#elementAnimationAdress.style.animation = "idle 0.5s infinite steps(7)";
+               this.#elementAnimationAdress.style.animation = "idle" + this.#heroSkin + " 0.5s infinite steps(" + this.#AnimationSteps[this.#heroSkin][0] + ")";
                break;
             case "run":
-               this.#elementAnimationAdress.style.animation = "run 0.5s infinite steps(7)";
+               this.#elementAnimationAdress.style.animation = "run" + this.#heroSkin + " 0.5s infinite steps(" + this.#AnimationSteps[this.#heroSkin][2] + ")";
                break;
             case "jump":
-               this.#elementAnimationAdress.style.animation = "jump 0.5s infinite steps(1)";
+               this.#elementAnimationAdress.style.animation = "jump" + this.#heroSkin + " 0.5s infinite steps(" + this.#AnimationSteps[this.#heroSkin][4] + ")";
                break;
             case "fall":
-               this.#elementAnimationAdress.style.animation = "fall 0.5s infinite steps(1)";
+               this.#elementAnimationAdress.style.animation = "fall" + this.#heroSkin + " 0.5s infinite steps(" + this.#AnimationSteps[this.#heroSkin][3] + ")";
                break;
          }
       }
@@ -279,6 +365,9 @@ class Player{
          }
          else{
             this.#elementAdress.remove();
+
+            document.getElementById("gameover").style.zIndex = "100";
+            document.getElementById("gameover").style.opacity = "1.0";
          }
       }
    }
@@ -293,7 +382,9 @@ class Player{
       if(new Date().getTime() - this.#playerInAttack > 500){
          this.#playerInAttack = new Date().getTime();
          this.AnimationSet("");
-         if(this.CheckAttackCollision(player))player.TakeHit(20);
+         setTimeout(() => {
+            if(this.CheckAttackCollision(player) && player.getDeathTime() == 0)player.TakeHit(20);
+         }, 100);
       }
    }
 
@@ -303,6 +394,8 @@ class Player{
       this.#hp -= damage;
       if(this.#hp <= 0)this.Death();
       this.#healthBarAdress.style.backgroundSize = this.#hp + '%' + " 100%";
+      let timer = setInterval(() => this.HorizontalStrafe(getPlayerDirection()), 10)
+      setTimeout(clearInterval(timer), 500);
    }
 
    Death(){
@@ -313,8 +406,8 @@ class Player{
 
 }
 
-var l = new Player(document.getElementById("playerCollision"))
-var p = new Player(document.getElementById("playerCollision2"))
+var l = new Player(document.getElementById("playerCollision"), localStorage[0]);
+var p = new Player(document.getElementById("playerCollision2"), localStorage[1]);
 
 
 function gameLoop(){

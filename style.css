@@ -1,8 +1,133 @@
-body{
+@font-face {
+	font-family: 'Pixel'; 
+	src: url(fonts/BreakPassword.otf); 
+}
+
+#start{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   background: url(images/wallhaven-rdj8jj.jpg);
+   background-size: cover;
+   margin: 0;
+   width: 100vw;
+   height: 100vh;
+   font-family: Pixel;
+   overflow: hidden;
+}
+
+#centerMenu{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   width: 25%;
+   height: 90%;
+   /*border: solid red;*/
+}
+
+.PlayerMenu{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   width: 25%;
+   height: 25vw;
+   border: 5px solid #ffcc00;
+   border-radius: 15px;
+   background: #781500;
+}
+
+#gameover{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   flex-direction: column;
+   width: 40%;
+   height: 40vw;
+   border: 5px solid #ffcc00;
+   border-radius: 15px;
+   background: #2a1b3d;
+   font-family: "Pixel";
+   z-index: -100;
+   font-size: 100px;
+   color: white;
+   opacity: 0;
+   transition: 2s;
+}
+
+.name{
+   font-size: 100px;
+   color: #ffcc00;
+   padding: 20px;
+   background-color: #781500;
+   border: 5px solid #ffe400;
+   border-radius: 100px;
+}
+
+.skin{
+   width: 40%;
+   height: 40%;
+   border: 5px solid #ffe400;
+   border-radius: 15px;
+}
+
+#startButton:hover{
+   color: white;
+   cursor: pointer;
+   border: 5px solid white;
+}
+
+#fstskin0{
+   background: url(images/MartialHero.gif);
+   background-size: cover;
+}
+
+#fstskin1{
+   background: url(images/MartialHero2.gif);
+   background-size: cover;
+}
+
+#fstskin2{
+   background: url(images/MartialHero3.gif);
+   background-size: 110% 110%;
+   background-position: -10px;
+}
+
+#fstskin3{
+   background: url(images/EvilWizard.gif);
+   background-size: 120% 120%;
+   background-position: -20px;
+}
+
+#sndskin0{
+   background: url(images/MartialHero.gif);
+   background-size: cover;
+}
+
+#sndskin1{
+   background: url(images/MartialHero2.gif);
+   background-size: cover;
+}
+
+#sndskin2{
+   background: url(images/MartialHero3.gif);
+   background-size: 110% 110%;
+   background-position: -10px;
+}
+
+#sndskin3{
+   background: url(images/EvilWizard.gif);
+   background-size: 120% 120%;
+   background-position: -20px;
+}
+
+#level{
    display: flex;
    align-items: center;
    justify-content: center;
-   background: url(/fantasy.jpg);
+   background: url(images/fantasy.jpg);
    background-size: cover;
    margin: 0;
    width: 100vw;
@@ -16,6 +141,18 @@ body{
    height: 800px;
 }
 
-.block{
-   filter: opacity(60%);
+#preloader{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   width: 100vw;
+   height: 100vh;
+   background: url(images/image.png);
+   background-size: cover;
+   z-index: 100;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 100px;
+   color: white;
 }

@@ -215,3 +215,32 @@ function gameLoop() {
 
    setTimeout(gameLoop, 10);
 }    
+
+
+
+
+
+
+
+
+
+
+constructor(element){
+      this.#elementAdress = element;
+      this.#playerLeftSpawnPoint = this.#elementAdress.style.left.slice(0, -2);
+      this.#playerTopSpawnPoint = this.#elementAdress.style.top.slice(0, -2);
+      this.#playerLeft = this.#playerLeftSpawnPoint;
+      this.#playerTop = this.#playerTopSpawnPoint;
+      this.#elementAnimationAdress = element.children[0];
+      this.#elementAdress.style.width = String(this.#collisionWidth) + "px";
+      this.#elementAdress.style.height = String(this.#collisionHeight) + "px";
+      this.#elementAnimationAdress.style.left = String(this.#Animateleft) + "px";
+      this.#elementAnimationAdress.style.top = String(this.#Animatetop) + "px";
+      this.#elementAnimationAdress.style.width = String(this.#AnimateWidth) + "px";
+      this.#elementAnimationAdress.style.height = String(this.#AnimateHeight) + "px";
+      this.#healthBarAdress = element.children[1];
+      this.#healthBarAdress.style.background = "url(https://i.hizliresim.com/Jm1Ofc.gif)"
+      this.#healthBarAdress.style.backgroundSize = "cover";
+      this.#healthBarAdress.style.backgroundRepeat = "no-repeat";
+
+   }

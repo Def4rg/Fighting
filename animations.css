@@ -1,4 +1,4 @@
-@keyframes idle{
+@keyframes idle0{
    from{
       background: url(MartialHero/Sprites/Idle.png);
       background-position: -80px -51px;
@@ -9,7 +9,7 @@
    }
 }
 
-@keyframes attack{
+@keyframes attack0{
    from{
       background: url(MartialHero/Sprites/Attack1.png);
       background-position: -80px -51px;
@@ -20,7 +20,7 @@
    }
 }
 
-@keyframes run{
+@keyframes run0{
    from{
       background: url(MartialHero/Sprites/Run.png);
       background-position: -80px -51px;
@@ -31,7 +31,7 @@
    }
 }
 
-@keyframes fall{
+@keyframes fall0{
    from{
       background: url(MartialHero/Sprites/Fall.png);
       background-position: -80px -51px;
@@ -42,7 +42,7 @@
    }
 }
 
-@keyframes jump{
+@keyframes jump0{
    from{
       background: url(MartialHero/Sprites/Jump.png);
       background-position: -80px -51px;
@@ -53,7 +53,7 @@
    }
 }
 
-@keyframes takehit {
+@keyframes takehit0{
    from{
       background: url(MartialHero/Sprites/Take\ Hit.png);
       background-position: -80px -51px;
@@ -64,7 +64,7 @@
    }
 }
 
-@keyframes death {
+@keyframes death0{
    from {
       background: url(MartialHero/Sprites/Death.png);
       background-position: -80px -51px;
@@ -72,6 +72,237 @@
    to{
       background: url(MartialHero/Sprites/Death.png);
       background-position: -1080px -51px;
+   }
+}
+
+@keyframes idle1{
+   from{
+      background: url(MartialHero2/Sprites/Idle.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Idle.png);
+      background-position: -680px -55px;
+   }
+}
+
+@keyframes attack1{
+   from{
+      background: url(MartialHero2/Sprites/Attack1.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Attack1.png);
+      background-position: -680px -55px;
+   }
+}
+
+@keyframes run1{
+   from{
+      background: url(MartialHero2/Sprites/Run.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Run.png);
+      background-position: -1480px -55px;
+   }
+}
+
+@keyframes fall1{
+   from{
+      background: url(MartialHero2/Sprites/Fall.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Fall.png);
+      background-position: -280px -55px;
+   }
+}
+
+@keyframes jump1{
+   from{
+      background: url(MartialHero2/Sprites/Jump.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero/Sprites/Jump.png);
+      background-position: -280px -55px;
+   }
+}
+
+@keyframes takehit1{
+   from{
+      background: url(MartialHero2/Sprites/Take\ Hit.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Take\ Hit.png);
+      background-position: -480px -55px;
+   }
+}
+
+@keyframes death1{
+   from {
+      background: url(MartialHero2/Sprites/Death.png);
+      background-position: -80px -55px;
+   }
+   to{
+      background: url(MartialHero2/Sprites/Death.png);
+      background-position: -1280px -55px;
+   }
+}
+
+@keyframes idle2{
+   from{
+      background: url(MartialHero3/Sprites/Idle.png);
+      background-position: -0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Idle.png);
+      background-position: -1136px 5px;
+   }
+}
+
+@keyframes attack2{
+   from{
+      background: url(MartialHero3/Sprites/Attack1.png);
+      background-position: -0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Attack1.png);
+      background-position: -756px 5px;
+   }
+}
+
+@keyframes run2{
+   from{
+      background: url(MartialHero3/Sprites/Run.png);
+      background-position: 0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Run.png);
+      background-position: 882px 5px;
+   }
+}
+
+@keyframes fall2{
+   from{
+      background: url(MartialHero3/Sprites/Fall.png);
+      background-position: 0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Fall.png);
+      background-position: -252px 5px;
+   }
+}
+
+@keyframes jump2{
+   from{
+      background: url(MartialHero3/Sprites/Jump.png);
+      background-position: 0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Jump.png);
+      background-position: -252px 5px;
+   }
+}
+
+@keyframes takehit2{
+   from{
+      background: url(MartialHero3/Sprites/Take\ Hit.png);
+      background-position: -0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Take\ Hit.png);
+      background-position: -252px 5px;
+   }
+}
+
+@keyframes death2{
+   from {
+      background: url(MartialHero3/Sprites/Death.png);
+      background-position: 0px 5px;
+   }
+   to{
+      background: url(MartialHero3/Sprites/Death.png);
+      background-position: -1260px 5px;
+   }
+}
+
+@keyframes idle3{
+   from{
+      background: url(EVilWizard2/Sprites/Idle.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Idle.png);
+      background-position: -1825px -15px;
+   }
+}
+
+@keyframes attack3{
+   from{
+      background: url(EVilWizard2/Sprites/Attack1.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Attack1.png);
+      background-position: -1825px -15px;
+   }
+}
+
+@keyframes run3{
+   from{
+      background: url(EVilWizard2/Sprites/Run.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Run.png);
+      background-position: -1825px -15px;
+   }
+}
+
+@keyframes fall3{
+   from{
+      background: url(EVilWizard2/Sprites/Fall.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Fall.png);
+      background-position: -325px -15px;
+   }
+}
+
+@keyframes jump3{
+   from{
+      background: url(EVilWizard2/Sprites/Jump.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Jump.png);
+      background-position: -325px -15px;
+   }
+}
+
+@keyframes takehit3{
+   from{
+      background: url(EVilWizard2/Sprites/Take\ Hit.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Take\ Hit.png);
+      background-position: -575px -15px;
+   }
+}
+
+@keyframes death3{
+   from {
+      background: url(EVilWizard2/Sprites/Death.png);
+      background-position: -75px -15px;
+   }
+   to{
+      background: url(EVilWizard2/Sprites/Death.png);
+      background-position: -1575px -15px;
    }
 }
 
